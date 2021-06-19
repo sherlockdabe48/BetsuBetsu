@@ -12,6 +12,13 @@ struct ContentView: View {
     @State private var checkAmount = ""
     @State private var numberOfPeople = 0
     @State private var tipPercentageChoice = 2
+    func checkNoTip() -> Bool {
+        if tipPercentageChoice == 4 {
+            return true
+        } else {
+            return false
+        }
+    }
     
     let tipPercentages = [10, 15, 20, 25, 0]
     
@@ -55,6 +62,7 @@ struct ContentView: View {
                 
                 Section(header: Text("Total Amount (Order + Tip)").textCase(nil)) {
                     Text("$\(totalPerPerson * Double(numberOfPeople + 2),specifier: "%.2f")")
+                        .foregroundColor(self.checkNoTip() ? .red : .black)
                 }
             }
             .navigationBarTitle("BetsuBetsu")
